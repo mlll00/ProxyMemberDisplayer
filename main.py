@@ -1,12 +1,15 @@
 from flask import Flask, request
-import os, requests, threading, time
+import os
+import requests
+import threading
+import time
 
 app = Flask(__name__)
 
 DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-CHANNEL_ID = "YOUR_CHANNEL_ID"
-MESSAGE_ID = "YOUR_MESSAGE_ID"
-TIMEOUT_SECONDS = 300  # 5 minutes
+CHANNEL_ID = "1359275211500814447"  # Replace with your actual channel ID
+MESSAGE_ID = "1359292187396931636"  # Replace with your actual message ID
+TIMEOUT_SECONDS = 300  # 5 minutes timeout for inactive users
 
 # Store user heartbeats {user_id: last_seen_timestamp}
 user_heartbeats = {}
@@ -18,8 +21,9 @@ def update_discord_message():
         "Content-Type": "application/json"
     }
     count = len(user_heartbeats)
-    json = {"content": f"🟢 Online Users: **{count}**"}
-    requests.patch(url, headers=headers, json=json)
+    json = {"content": f"Online Users: **{count}**"}
+    response = requests.patch(url, headers=headers, json=json)
+    return response.status_code
 
 @app.route("/webhook", methods=["POST"])
 def receive_ping():
@@ -29,7 +33,10 @@ def receive_ping():
     if not user_id:
         return {"error": "Missing user_id"}, 400
 
+    # Update the user's heartbeat timestamp
     user_heartbeats[user_id] = time.time()
+
+    # Update Discord message with the current online count
     update_discord_message()
 
     return {"message": f"Heartbeat received from {user_id}", "online": len(user_heartbeats)}, 200
@@ -40,6 +47,7 @@ def cleanup_thread():
         now = time.time()
         removed = []
 
+        # Remove users who haven't pinged in the last TIMEOUT_SECONDS
         for user_id in list(user_heartbeats):
             if now - user_heartbeats[user_id] > TIMEOUT_SECONDS:
                 removed.append(user_id)
@@ -53,7 +61,16 @@ threading.Thread(target=cleanup_thread, daemon=True).start()
 
 @app.route("/")
 def index():
-    return "Heartbeat listener is running!"
+    count = len(user_heartbeats)
+    return f"""
+    <html>
+        <head><title>Proxy Status</title></head>
+        <body style='font-family:sans-serif; text-align:center; margin-top:100px;'>
+            <h1>Online Users</h1>
+            <h2 style='font-size:48px'>{count}</h2>
+        </body>
+    </html>
+    """
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
