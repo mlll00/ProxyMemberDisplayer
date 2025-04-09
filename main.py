@@ -9,7 +9,7 @@ app = Flask(__name__)
 DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 CHANNEL_ID = "1359275211500814447"  # Replace with your actual channel ID
 MESSAGE_ID = "1359292187396931636"  # Replace with your actual message ID
-TIMEOUT_SECONDS = 10  # 10 Seconds timeout for inactive users
+TIMEOUT_SECONDS = 30  # 30 Seconds timeout for inactive users
 
 # Store user heartbeats {user_id: last_seen_timestamp}
 user_heartbeats = {}
@@ -74,7 +74,7 @@ def receive_ping():
 
 def cleanup_thread():
     while True:
-        time.sleep(10)  # check every minute
+        time.sleep(30)  # check every 30 seconds
         now = time.time()
         removed = []
 
