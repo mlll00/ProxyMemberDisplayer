@@ -40,11 +40,14 @@ def update_discord_message():
             }
         ],
         "footer": {
-            "text": "Server Status Monitor",
-            "icon_url": "https://discord.com/assets/847541504914fd33810e70a0ea73177e.ico"
+            "text": "User Status Logger",
+            "icon_url": "https://cdn.discordapp.com/attachments/1292830054715228241/1329103986149560457/IMG_0611.gif?ex=67f7de0b&is=67f68c8b&hm=ba42bda3a5e819bee949231c111c7ee2028a9fb59510877f192fd5dce962a065&"
         },
         "thumbnail": {
-            "url": "https://cdn3.emoji.gg/emojis/5123-discord-online.png"
+            "url": "https://cdn.discordapp.com/attachments/1292830054715228241/1329103986149560457/IMG_0611.gif?ex=67f7de0b&is=67f68c8b&hm=ba42bda3a5e819bee949231c111c7ee2028a9fb59510877f192fd5dce962a065&"
+        },
+        "image": {
+            "url": "https://cdn.discordapp.com/attachments/1292830054715228241/1329103986149560457/IMG_0611.gif?ex=67f7de0b&is=67f68c8b&hm=ba42bda3a5e819bee949231c111c7ee2028a9fb59510877f192fd5dce962a065&"
         }
     }
     
