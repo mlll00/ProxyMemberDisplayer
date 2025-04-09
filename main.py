@@ -44,7 +44,7 @@ def update_discord_message():
             "icon_url": "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
         },
         "thumbnail": {
-            "url": "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnhyanp1MXJ5Y2hnZDFhOTQ5eW5zaWtkOXI3NzRxejczOHFrOTR4dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/J47crA9L0GpTBsLMVK/giphy.gif"
+            "url": "https://media.tenor.com/yjOrdcOkLPUAAAAi/green-dot.gif"
         },
         "image": {
             "url": "https://cdn.discordapp.com/attachments/1292830054715228241/1329103986149560457/IMG_0611.gif?ex=67f7de0b&is=67f68c8b&hm=ba42bda3a5e819bee949231c111c7ee2028a9fb59510877f192fd5dce962a065&"
