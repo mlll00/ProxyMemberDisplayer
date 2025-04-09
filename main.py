@@ -43,7 +43,7 @@ def receive_ping():
 
 def cleanup_thread():
     while True:
-        time.sleep(60)  # check every minute
+        time.sleep(1)  # check every minute
         now = time.time()
         removed = []
 
