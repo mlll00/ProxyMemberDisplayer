@@ -21,8 +21,39 @@ def update_discord_message():
         "Content-Type": "application/json"
     }
     count = len(user_heartbeats)
-    json = {"content": f"Online Users: **{count}**"}
-    response = requests.patch(url, headers=headers, json=json)
+    
+    # Create an embed
+    embed = {
+        "title": "Proxy User Status",
+        "description": "Real-time user activity tracking",
+        "color": 0x5865F2,  # Discord blurple color
+        "fields": [
+            {
+                "name": "Online Users",
+                "value": f"```\n{count} active connections\n```",
+                "inline": True
+            },
+            {
+                "name": "Last Updated",
+                "value": f"<t:{int(time.time())}:R>",
+                "inline": True
+            }
+        ],
+        "footer": {
+            "text": "Server Status Monitor",
+            "icon_url": "https://discord.com/assets/847541504914fd33810e70a0ea73177e.ico"
+        },
+        "thumbnail": {
+            "url": "https://cdn3.emoji.gg/emojis/5123-discord-online.png"
+        }
+    }
+    
+    json_data = {
+        "embeds": [embed],
+        "content": None  # Remove the plain text content
+    }
+    
+    response = requests.patch(url, headers=headers, json=json_data)
     return response.status_code
 
 @app.route("/webhook", methods=["POST"])
